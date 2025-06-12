@@ -10,8 +10,30 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 0) do
+ActiveRecord::Schema[8.0].define(version: 2025_06_12_001341) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
+  create_table "transactions", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.string "from_currency"
+    t.string "to_currency"
+    t.decimal "amount_from"
+    t.decimal "amount_to"
+    t.decimal "price_reference"
+    t.integer "status", default: 0
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_transactions_on_user_id"
+  end
+
+  create_table "users", force: :cascade do |t|
+    t.string "name"
+    t.decimal "balance_usd", precision: 16, scale: 2
+    t.decimal "balance_btc", precision: 16, scale: 8
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_foreign_key "transactions", "users"
 end
