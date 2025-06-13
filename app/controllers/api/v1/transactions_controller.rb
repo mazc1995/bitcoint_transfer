@@ -1,6 +1,11 @@
 module Api::V1
   class TransactionsController < ApplicationController
 
+    def index
+      @transactions = Transactions::IndexTransactions.new(index_params).call
+      render json: @transactions, status: :ok
+    end
+
     def show
       @transaction = Transactions::GetTransaction.new(show_params).call
       render json: @transaction, status: :ok
@@ -14,6 +19,10 @@ module Api::V1
     end
 
     private
+
+    def index_params
+      params.permit(:user_id)
+    end
 
     def show_params
       params.permit(:id, :user_id)

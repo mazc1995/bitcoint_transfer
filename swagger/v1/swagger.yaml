@@ -44,3 +44,31 @@ paths:
               - from_currency
               - to_currency
               - amount_from
+    get:
+      summary: Gets all transactions
+      tags:
+      - Transactions
+      responses:
+        '200':
+          description: transactions found
+  "/api/v1/users/{user_id}/transactions/{id}":
+    parameters:
+    - name: user_id
+      in: path
+      required: true
+      schema:
+        type: integer
+    - name: id
+      in: path
+      required: true
+      schema:
+        type: integer
+    get:
+      summary: Gets a transaction
+      tags:
+      - Transactions
+      responses:
+        '200':
+          description: transaction found
+        '404':
+          description: transaction not found

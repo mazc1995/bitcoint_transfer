@@ -78,4 +78,17 @@ RSpec.describe 'Transactions API', type: :request do
       end
     end
   end
+
+  path '/api/v1/users/{user_id}/transactions' do
+    parameter name: :user_id, in: :path, type: :integer, required: true
+
+    get 'Gets all transactions' do
+      tags 'Transactions'
+      response '200', 'transactions found' do
+        let(:user_id) { user.id }
+        let!(:transaction) { create_list(:transaction, 3, user:) }
+        run_test!
+      end
+    end
+  end
 end
