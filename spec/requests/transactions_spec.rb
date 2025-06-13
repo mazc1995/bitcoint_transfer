@@ -57,4 +57,25 @@ RSpec.describe 'Transactions API', type: :request do
       end
     end
   end
+
+  path '/api/v1/users/{user_id}/transactions/{id}' do
+    parameter name: :user_id, in: :path, type: :integer, required: true
+    parameter name: :id, in: :path, type: :integer, required: true
+
+    get 'Gets a transaction' do
+      tags 'Transactions'
+      response '200', 'transaction found' do
+        let(:user_id) { user.id }
+        let!(:transaction) { create(:transaction, user:) }
+        let(:id) { transaction.id }
+        run_test!
+      end
+
+      response '404', 'transaction not found' do
+        let(:user_id) { user.id }
+        let(:id) { 999 }
+        run_test!
+      end
+    end
+  end
 end
