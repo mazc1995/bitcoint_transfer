@@ -1,0 +1,46 @@
+---
+openapi: 3.0.1
+info:
+  title: API V1
+  version: v1
+paths:
+  "/api/v1/users/{user_id}/transactions":
+    parameters:
+    - name: user_id
+      in: path
+      required: true
+      schema:
+        type: integer
+    post:
+      summary: Creates a transaction
+      tags:
+      - Transactions
+      parameters: []
+      responses:
+        '201':
+          description: transaction created
+        '422':
+          description: invalid request
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                from_currency:
+                  type: string
+                  enum:
+                  - usd
+                  - bitcoin
+                to_currency:
+                  type: string
+                  enum:
+                  - usd
+                  - bitcoin
+                amount_from:
+                  type: number
+                  format: float
+              required:
+              - from_currency
+              - to_currency
+              - amount_from
