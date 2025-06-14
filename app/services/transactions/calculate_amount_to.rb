@@ -1,5 +1,3 @@
-require_relative 'errors'
-
 module Transactions
   class CalculateAmountTo
     def initialize(from_currency:, to_currency:, amount_from:, price:, user_id: nil, transaction_id: nil)

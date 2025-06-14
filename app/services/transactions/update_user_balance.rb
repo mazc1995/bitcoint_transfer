@@ -1,5 +1,3 @@
-require_relative 'errors'
-
 module Transactions
   class UpdateUserBalance
     def initialize(user:, from_currency:, to_currency:, amount_from:, amount_to:, transaction_id: nil)

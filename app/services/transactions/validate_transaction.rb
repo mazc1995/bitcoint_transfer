@@ -1,5 +1,3 @@
-require_relative 'errors'
-
 module Transactions
   class ValidateTransaction
     ALLOWED_CURRENCY_TRANSACTIONS = [['usd', 'bitcoin'], ['bitcoin', 'usd']].freeze

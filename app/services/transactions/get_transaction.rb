@@ -1,5 +1,3 @@
-require_relative 'errors'
-
 module Transactions
   class GetTransaction
     attr_reader :id, :user_id
