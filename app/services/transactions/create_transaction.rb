@@ -19,8 +19,7 @@ module Transactions
 
     # @return [Transaction]
     def call
-      validate_currency_pair!
-      validate_balance!
+      validate_transaction
       fetch_price
       calculate_amount_to
       create_transaction
@@ -38,6 +37,49 @@ module Transactions
 
     private
 
+    # @return [void]
+    def validate_transaction
+      Transactions::ValidateTransaction.new(
+        user: user,
+        from_currency: from_currency,
+        to_currency: to_currency,
+        amount_from: amount_from
+      ).call
+    end
+
+    # @return [Float]
+    def fetch_price
+      @price = Coingecko::FetchPrice.new.call
+    end
+
+    # @return [Float]
+    def calculate_amount_to
+      @amount_to = Transactions::CalculateAmountTo.new(
+        from_currency: from_currency,
+        to_currency: to_currency,
+        amount_from: amount_from,
+        price: price
+      ).call
+    end
+
+    # @return [Transaction]
+    def complete_transaction
+      transaction.update!(
+        status: :completed
+      )
+    end
+
+    # @return [void]
+    def update_user_balance
+      Transactions::UpdateUserBalance.new(
+        user: user,
+        from_currency: from_currency,
+        to_currency: to_currency,
+        amount_from: amount_from,
+        amount_to: amount_to
+      ).call
+    end
+
     # @return [Transaction]
     def create_transaction
       @transaction = Transaction.create!(
@@ -49,77 +91,6 @@ module Transactions
         price_reference: price,
         status: :pending
       )
-    end
-
-    # @return [Float]
-    def fetch_price
-      @price = Coingecko::FetchPrice.new.call
-    end
-
-    # @return [void]
-    def validate_currency_pair!
-      raise_invalid_currency_pair! unless currency_pair.in?(ALLOWED_CURRENCY_TRANSACTIONS)
-    end
-
-    # @return [Array]
-    def currency_pair
-      [from_currency, to_currency]
-    end
-
-    # @return [Float]
-    def calculate_amount_to
-      case currency_pair
-      when ['usd', 'bitcoin'] then @amount_to = amount_from / price
-      when ['bitcoin', 'usd'] then @amount_to = amount_from * price
-      end
-    end
-
-    # @return [void]
-    # @raise [StandardError] if the balance is insufficient
-    # @raise [StandardError] if the currency pair is invalid (usd to bitcoin or bitcoin to usd)
-    def validate_balance!
-      required_amount = amount_from
-
-      case currency_pair
-      when ['usd', 'bitcoin']
-        raise_insufficient_balance! if user.balance_usd < required_amount
-      when ['bitcoin', 'usd']
-        raise_insufficient_balance! if user.balance_btc < required_amount
-      end
-    end
-
-    # @return [void]
-    def complete_transaction
-      transaction.update!(
-        status: :completed
-      )
-    end
-
-    # @return [void]
-    # @raise [StandardError] if the currency pair is invalid (usd to bitcoin or bitcoin to usd)
-    def update_user_balance
-      case currency_pair
-      when ['usd', 'bitcoin']
-        user.update!(
-          balance_usd: user.balance_usd - amount_from,
-          balance_btc: user.balance_btc + amount_to
-        )
-      when ['bitcoin', 'usd']
-        user.update!(
-          balance_usd: user.balance_usd + amount_to,
-          balance_btc: user.balance_btc - amount_from
-        )
-      end
-    end
-
-    # @raise [StandardError] if the balance is insufficient
-    def raise_insufficient_balance!
-      raise StandardError, "Insufficient balance"
-    end
-
-    # @raise [StandardError] if the currency pair is invalid (usd to bitcoin or bitcoin to usd)
-    def raise_invalid_currency_pair!
-      raise StandardError, "Invalid currency pair. Only USD to BTC and BTC to USD are supported."
     end
   end
 end
