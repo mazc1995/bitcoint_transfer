@@ -11,6 +11,7 @@ Rails.application.routes.draw do
       get 'currencies/btc_price', to: 'currencies#btc_price'
       post 'register', to: 'auth#register'
       post 'login', to: 'auth#login'
+      resources :transactions, only: [:index, :show, :create]
     end
   end
 end

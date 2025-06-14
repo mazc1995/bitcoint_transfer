@@ -44,6 +44,12 @@ gem "rack-cors"
 # Add jwt gem
 gem "jwt"
 
+# Add pundit gem
+gem "pundit"
+
+# Add active_model_serializers gem
+gem "active_model_serializers"
+
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem "byebug"
@@ -63,4 +69,7 @@ group :development, :test do
 
   # Omakase Ruby styling [https://github.com/rails/rubocop-rails-omakase/]
   gem "rubocop-rails-omakase", require: false
+
+  gem 'pry'
+  gem 'pry-byebug'
 end

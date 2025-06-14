@@ -5,34 +5,39 @@ module Api::V1
     before_action :authenticate_user!
 
     def index
+      authorize User.find(params[:user_id]), :index_transactions?
       @transactions = Transactions::IndexTransactions.new(index_params).call
-      render json: @transactions, status: :ok
+      render json: @transactions, each_serializer: TransactionSerializer, status: :ok
     end
 
     def show
+      authorize User.find(params[:user_id]), :show_transaction?
       @transaction = Transactions::GetTransaction.new(show_params).call
-      render json: @transaction, status: :ok
+      render json: @transaction, serializer: TransactionSerializer, status: :ok
     end
 
     def create
+      authorize User.find(params[:user_id]), :create_transaction?
       @transaction = Transactions::CreateTransaction.new(transaction_params).call
-      render json: @transaction, status: :created
-    rescue StandardError => e
-      render json: { error: e.message }, status: :unprocessable_entity
+      render json: @transaction, serializer: TransactionSerializer, status: :created
     end
 
     rescue_from Transactions::TransactionNotFoundError do |e|
       render json: { status: 404, error: e.message }, status: :not_found
     end
 
+    rescue_from Transactions::InvalidCurrencyPairError do |e|
+      render json: { error: e.message }, status: :unprocessable_entity
+    end
+
     private
 
     def index_params
-      params.permit(:user_id)
+      { user_id: current_user.id }
     end
 
     def show_params
-      params.permit(:id, :user_id)
+      { id: params[:id], user_id: current_user.id }
     end
 
     def transaction_params

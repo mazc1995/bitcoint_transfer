@@ -3,7 +3,84 @@ openapi: 3.0.1
 info:
   title: API V1
   version: v1
+  description: |2
+
+    ### Instrucciones para autenticación JWT
+
+    1. Regístrate o haz login usando los endpoints `/api/v1/register` o `/api/v1/login`.
+    2. Copia el token JWT que devuelve la respuesta.
+    3. Haz clic en el botón 'Authorize' (arriba a la derecha en Swagger UI).
+    4. Pega el token en el campo 'Bearer' y confirma.
+    5. Ahora puedes hacer peticiones a los endpoints protegidos.
+
+    El token se debe pegar con el prefijo `Bearer ` (Swagger lo agrega automáticamente).
+components:
+  securitySchemes:
+    Bearer:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
 paths:
+  "/api/v1/register":
+    post:
+      summary: Register a new user
+      tags:
+      - Auth
+      parameters: []
+      responses:
+        '201':
+          description: user created
+        '422':
+          description: email already taken
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  example: John Doe
+                email:
+                  type: string
+                  example: john.doe@example.com
+                password:
+                  type: string
+                  example: password123
+                password_confirmation:
+                  type: string
+                  example: password123
+              required:
+              - name
+              - email
+              - password
+              - password_confirmation
+  "/api/v1/login":
+    post:
+      summary: Login a user
+      tags:
+      - Auth
+      parameters: []
+      responses:
+        '200':
+          description: login successful
+        '401':
+          description: login with non-existent email
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  example: john.doe@example.com
+                password:
+                  type: string
+                  example: password123
+              required:
+              - email
+              - password
   "/api/v1/currencies/btc_price":
     get:
       summary: Gets the price of BTC
@@ -12,6 +89,8 @@ paths:
       responses:
         '200':
           description: price fetched
+        '502':
+          description: coingecko error
   "/api/v1/users/{user_id}/transactions":
     parameters:
     - name: user_id
@@ -21,6 +100,8 @@ paths:
         type: integer
     post:
       summary: Creates a transaction
+      security:
+      - Bearer: []
       tags:
       - Transactions
       parameters: []
@@ -29,6 +110,10 @@ paths:
           description: transaction created
         '422':
           description: invalid request
+        '401':
+          description: unauthorized when no token
+        '403':
+          description: forbidden for other user
       requestBody:
         content:
           application/json:
@@ -55,6 +140,8 @@ paths:
               - amount_from
     get:
       summary: Gets all transactions
+      security:
+      - Bearer: []
       tags:
       - Transactions
       responses:
@@ -74,10 +161,12 @@ paths:
         type: integer
     get:
       summary: Gets a transaction
+      security:
+      - Bearer: []
       tags:
       - Transactions
       responses:
         '200':
           description: transaction found
         '404':
-          description: transaction not found
+          description: transaction not found for wrong user
