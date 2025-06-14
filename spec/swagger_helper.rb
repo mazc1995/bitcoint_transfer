@@ -19,8 +19,29 @@ RSpec.configure do |config|
       openapi: '3.0.1',
       info: {
         title: 'API V1',
-        version: 'v1'
+        version: 'v1',
+        description: """
+### Instrucciones para autenticación JWT
+
+1. Regístrate o haz login usando los endpoints `/api/v1/register` o `/api/v1/login`.
+2. Copia el token JWT que devuelve la respuesta.
+3. Haz clic en el botón 'Authorize' (arriba a la derecha en Swagger UI).
+4. Pega el token en el campo 'Bearer' y confirma.
+5. Ahora puedes hacer peticiones a los endpoints protegidos.
+
+El token se debe pegar con el prefijo `Bearer ` (Swagger lo agrega automáticamente).
+"""
       },
+      components: {
+        securitySchemes: {
+          Bearer: {
+            type: :http,
+            scheme: :bearer,
+            bearerFormat: :JWT
+          }
+        }
+      },
+      # security: [{ Bearer: [] }],
       paths: {}
     }
   }

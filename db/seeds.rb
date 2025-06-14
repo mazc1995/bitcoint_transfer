@@ -1,2 +1,2 @@
-User.create!(name: 'John Doe', balance_usd: 100000, balance_btc: 0)
-User.create!(name: 'Jane Doe', balance_usd: 0, balance_btc: 100000)
+User.create!(name: 'John Doe', email: 'john.doe@example.com', password: 'password123', password_confirmation: 'password123', balance_usd: 100000, balance_btc: 0)
+User.create!(name: 'Jane Doe', email: 'jane.doe@example.com', password: 'password123', password_confirmation: 'password123', balance_usd: 0, balance_btc: 100000)

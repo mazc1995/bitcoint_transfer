@@ -2,6 +2,7 @@ require_relative '../../../services/transactions/errors'
 
 module Api::V1
   class TransactionsController < ApplicationController
+    before_action :authenticate_user!
 
     def index
       @transactions = Transactions::IndexTransactions.new(index_params).call

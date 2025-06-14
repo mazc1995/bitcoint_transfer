@@ -9,6 +9,8 @@ Rails.application.routes.draw do
         resources :transactions, only: [:index, :create, :show]
       end
       get 'currencies/btc_price', to: 'currencies#btc_price'
+      post 'register', to: 'auth#register'
+      post 'login', to: 'auth#login'
     end
   end
 end
