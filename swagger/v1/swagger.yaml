@@ -4,6 +4,14 @@ info:
   title: API V1
   version: v1
 paths:
+  "/api/v1/currencies/btc_price":
+    get:
+      summary: Gets the price of BTC
+      tags:
+      - Currencies
+      responses:
+        '200':
+          description: price fetched
   "/api/v1/users/{user_id}/transactions":
     parameters:
     - name: user_id
@@ -35,11 +43,12 @@ paths:
                 to_currency:
                   type: string
                   enum:
-                  - usd
                   - bitcoin
+                  - usd
                 amount_from:
                   type: number
                   format: float
+                  default: 50.0
               required:
               - from_currency
               - to_currency

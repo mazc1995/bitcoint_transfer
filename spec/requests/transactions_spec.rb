@@ -13,8 +13,8 @@ RSpec.describe 'Transactions API', type: :request do
         type: :object,
         properties: {
           from_currency: { type: :string, enum: ['usd', 'bitcoin'] },
-          to_currency: { type: :string, enum: ['usd', 'bitcoin'] },
-          amount_from: { type: :number, format: :float }
+          to_currency: { type: :string, enum: ['bitcoin', 'usd'] },
+          amount_from: { type: :number, format: :float, default: 50.0 }
         },
         required: ['from_currency', 'to_currency', 'amount_from']
       }

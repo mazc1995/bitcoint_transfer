@@ -8,6 +8,7 @@ Rails.application.routes.draw do
       resources :users do
         resources :transactions, only: [:index, :create, :show]
       end
+      get 'currencies/btc_price', to: 'currencies#btc_price'
     end
   end
 end
