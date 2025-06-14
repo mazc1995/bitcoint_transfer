@@ -58,7 +58,9 @@ module Transactions
         from_currency: from_currency,
         to_currency: to_currency,
         amount_from: amount_from,
-        price: price
+        price: price,
+        user_id: user.id,
+        transaction_id: transaction&.id
       ).call
     end
 
@@ -76,7 +78,8 @@ module Transactions
         from_currency: from_currency,
         to_currency: to_currency,
         amount_from: amount_from,
-        amount_to: amount_to
+        amount_to: amount_to,
+        transaction_id: transaction&.id
       ).call
     end
 

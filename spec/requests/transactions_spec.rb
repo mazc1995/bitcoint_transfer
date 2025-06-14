@@ -74,7 +74,25 @@ RSpec.describe 'Transactions API', type: :request do
       response '404', 'transaction not found' do
         let(:user_id) { user.id }
         let(:id) { 999 }
-        run_test!
+        run_test! do |response|
+          expect(response).to have_http_status(:not_found)
+          json = JSON.parse(response.body)
+          expect(json['status']).to eq(404)
+          expect(json['error']).to match(/Transaction not found.*transaction_id: 999.*user_id: #{user.id}/)
+        end
+      end
+
+      response '404', 'transaction not found for wrong user' do
+        let(:other_user) { create(:user) }
+        let!(:transaction) { create(:transaction, user: other_user) }
+        let(:user_id) { user.id }
+        let(:id) { transaction.id }
+        run_test! do |response|
+          expect(response).to have_http_status(:not_found)
+          json = JSON.parse(response.body)
+          expect(json['status']).to eq(404)
+          expect(json['error']).to match(/Transaction not found.*transaction_id: #{id}.*user_id: #{user.id}/)
+        end
       end
     end
   end

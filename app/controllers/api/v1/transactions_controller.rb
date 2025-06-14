@@ -1,3 +1,5 @@
+require_relative '../../../services/transactions/errors'
+
 module Api::V1
   class TransactionsController < ApplicationController
 
@@ -16,6 +18,10 @@ module Api::V1
       render json: @transaction, status: :created
     rescue StandardError => e
       render json: { error: e.message }, status: :unprocessable_entity
+    end
+
+    rescue_from Transactions::TransactionNotFoundError do |e|
+      render json: { status: 404, error: e.message }, status: :not_found
     end
 
     private

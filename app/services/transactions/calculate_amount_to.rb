@@ -1,10 +1,14 @@
+require_relative 'errors'
+
 module Transactions
   class CalculateAmountTo
-    def initialize(from_currency:, to_currency:, amount_from:, price:)
+    def initialize(from_currency:, to_currency:, amount_from:, price:, user_id: nil, transaction_id: nil)
       @from_currency = from_currency
       @to_currency = to_currency
       @amount_from = amount_from
       @price = price
+      @user_id = user_id
+      @transaction_id = transaction_id
     end
 
     def call
@@ -14,7 +18,7 @@ module Transactions
       when ['bitcoin', 'usd']
         @amount_from * @price
       else
-        raise StandardError, 'Invalid currency pair for calculation'
+        raise Transactions::InvalidCalculationPairError.new(user_id: @user_id, transaction_id: @transaction_id)
       end
     end
   end

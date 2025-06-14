@@ -1,11 +1,14 @@
+require_relative 'errors'
+
 module Transactions
   class UpdateUserBalance
-    def initialize(user:, from_currency:, to_currency:, amount_from:, amount_to:)
+    def initialize(user:, from_currency:, to_currency:, amount_from:, amount_to:, transaction_id: nil)
       @user = user
       @from_currency = from_currency
       @to_currency = to_currency
       @amount_from = amount_from
       @amount_to = amount_to
+      @transaction_id = transaction_id
     end
 
     def call
@@ -21,7 +24,7 @@ module Transactions
           balance_btc: @user.balance_btc - @amount_from
         )
       else
-        raise StandardError, 'Invalid currency pair for balance update'
+        raise Transactions::InvalidBalanceUpdatePairError.new(user_id: @user.id, transaction_id: @transaction_id)
       end
     end
   end

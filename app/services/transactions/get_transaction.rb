@@ -1,3 +1,5 @@
+require_relative 'errors'
+
 module Transactions
   class GetTransaction
     attr_reader :id, :user_id
@@ -8,8 +10,14 @@ module Transactions
     end
 
     def call
-      transaction = Transaction.find(id)
-      raise StandardError, 'Transaction not found' if transaction.user_id != user_id
+      begin
+        transaction = Transaction.find(id)
+      rescue ActiveRecord::RecordNotFound
+        raise Transactions::TransactionNotFoundError.new(transaction_id: id, user_id: user_id)
+      end
+      if transaction.user_id != user_id
+        raise Transactions::TransactionNotFoundError.new(transaction_id: id, user_id: user_id)
+      end
       transaction
     end
   end

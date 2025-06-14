@@ -1,4 +1,5 @@
 require 'rails_helper'
+require_relative '../../../app/services/transactions/errors'
 
 RSpec.describe Transactions::CreateTransaction do
   describe '#call' do
@@ -36,10 +37,10 @@ RSpec.describe Transactions::CreateTransaction do
       let!(:user) { create(:user) }
       let(:transaction_params) { { user_id: user.id, from_currency: 'usd', to_currency: 'eth', amount_from: 100 } }
 
-      it 'raises an error' do
+      it 'raises an error personalizada' do
         expect {
           described_class.new(transaction_params).call
-        }.to raise_error(StandardError, 'Invalid currency pair. Only USD to BTC and BTC to USD are supported.')
+        }.to raise_error(Transactions::InvalidCurrencyPairError, /user_id: #{user.id}/)
       end
     end
 
@@ -47,10 +48,10 @@ RSpec.describe Transactions::CreateTransaction do
       let!(:user) { create(:user, :with_no_balance) }
       let(:transaction_params) { { user_id: user.id, from_currency: 'usd', to_currency: 'bitcoin', amount_from: 100000 } }
 
-      it 'raises an error' do
+      it 'raises an error personalizada' do
         expect {
           described_class.new(transaction_params).call
-        }.to raise_error(StandardError, 'Insufficient balance')
+        }.to raise_error(Transactions::InsufficientBalanceError, /user_id: #{user.id}/)
       end
     end
   end
