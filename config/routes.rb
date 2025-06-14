@@ -14,4 +14,6 @@ Rails.application.routes.draw do
       resources :transactions, only: [:index, :show, :create]
     end
   end
+
+  root to: redirect('/api-docs')
 end
