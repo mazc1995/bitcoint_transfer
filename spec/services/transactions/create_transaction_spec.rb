@@ -40,7 +40,7 @@ RSpec.describe Transactions::CreateTransaction do
       it 'raises an error personalizada' do
         expect {
           described_class.new(transaction_params).call
-        }.to raise_error(Transactions::InvalidCurrencyPairError, /user_id: #{user.id}/)
+        }.to raise_error(Transactions::Errors::InvalidCurrencyPairError, /user_id: #{user.id}/)
       end
     end
 
@@ -51,7 +51,7 @@ RSpec.describe Transactions::CreateTransaction do
       it 'raises an error personalizada' do
         expect {
           described_class.new(transaction_params).call
-        }.to raise_error(Transactions::InsufficientBalanceError, /user_id: #{user.id}/)
+        }.to raise_error(Transactions::Errors::InsufficientBalanceError, /user_id: #{user.id}/)
       end
     end
   end

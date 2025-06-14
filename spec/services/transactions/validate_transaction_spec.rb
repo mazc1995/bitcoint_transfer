@@ -22,7 +22,7 @@ RSpec.describe Transactions::ValidateTransaction do
     it 'raises error personalizada con user_id' do
       expect {
         described_class.new(user: user, from_currency: 'usd', to_currency: 'eth', amount_from: 10).call
-      }.to raise_error(Transactions::InvalidCurrencyPairError, /user_id: #{user.id}/)
+      }.to raise_error(Transactions::Errors::InvalidCurrencyPairError, /user_id: #{user.id}/)
     end
   end
 
@@ -32,13 +32,13 @@ RSpec.describe Transactions::ValidateTransaction do
     it 'raises error personalizada para usd a bitcoin' do
       expect {
         described_class.new(user: user, from_currency: 'usd', to_currency: 'bitcoin', amount_from: 10).call
-      }.to raise_error(Transactions::InsufficientBalanceError, /user_id: #{user.id}/)
+      }.to raise_error(Transactions::Errors::InsufficientBalanceError, /user_id: #{user.id}/)
     end
 
     it 'raises error personalizada para bitcoin a usd' do
       expect {
         described_class.new(user: user, from_currency: 'bitcoin', to_currency: 'usd', amount_from: 0.1).call
-      }.to raise_error(Transactions::InsufficientBalanceError, /user_id: #{user.id}/)
+      }.to raise_error(Transactions::Errors::InsufficientBalanceError, /user_id: #{user.id}/)
     end
   end
 

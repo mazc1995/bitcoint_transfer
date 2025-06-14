@@ -11,10 +11,10 @@ module Transactions
       begin
         transaction = Transaction.find(id)
       rescue ActiveRecord::RecordNotFound
-        raise Transactions::TransactionNotFoundError.new(transaction_id: id, user_id: user_id)
+        raise Transactions::Errors::TransactionNotFoundError.new(transaction_id: id, user_id: user_id)
       end
       if transaction.user_id != user_id
-        raise Transactions::TransactionNotFoundError.new(transaction_id: id, user_id: user_id)
+        raise Transactions::Errors::TransactionNotFoundError.new(transaction_id: id, user_id: user_id)
       end
       transaction
     end

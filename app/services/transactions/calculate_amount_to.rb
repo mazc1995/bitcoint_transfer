@@ -16,7 +16,7 @@ module Transactions
       when ['bitcoin', 'usd']
         @amount_from * @price
       else
-        raise Transactions::InvalidCalculationPairError.new(user_id: @user_id, transaction_id: @transaction_id)
+        raise Transactions::Errors::InvalidCalculationPairError.new(user_id: @user_id, transaction_id: @transaction_id)
       end
     end
   end

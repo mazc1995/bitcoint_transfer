@@ -18,7 +18,7 @@ module Transactions
 
     def validate_currency_pair!
       unless [@from_currency, @to_currency].in?(ALLOWED_CURRENCY_TRANSACTIONS)
-        raise Transactions::InvalidCurrencyPairError.new(user_id: @user.id)
+        raise Transactions::Errors::InvalidCurrencyPairError.new(user_id: @user.id)
       end
     end
 
@@ -26,9 +26,9 @@ module Transactions
       required_amount = @amount_from
       case [@from_currency, @to_currency]
       when ['usd', 'bitcoin']
-        raise Transactions::InsufficientBalanceError.new(user_id: @user.id) if @user.balance_usd < required_amount
+        raise Transactions::Errors::InsufficientBalanceError.new(user_id: @user.id) if @user.balance_usd < required_amount
       when ['bitcoin', 'usd']
-        raise Transactions::InsufficientBalanceError.new(user_id: @user.id) if @user.balance_btc < required_amount
+        raise Transactions::Errors::InsufficientBalanceError.new(user_id: @user.id) if @user.balance_btc < required_amount
       end
     end
   end

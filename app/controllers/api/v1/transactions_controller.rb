@@ -20,11 +20,11 @@ module Api::V1
       render json: @transaction, serializer: TransactionSerializer, status: :created
     end
 
-    rescue_from Transactions::TransactionNotFoundError do |e|
+    rescue_from Transactions::Errors::TransactionNotFoundError do |e|
       render json: { status: 404, error: e.message }, status: :not_found
     end
 
-    rescue_from Transactions::InvalidCurrencyPairError do |e|
+    rescue_from Transactions::Errors::InvalidCurrencyPairError do |e|
       render json: { error: e.message }, status: :unprocessable_entity
     end
 

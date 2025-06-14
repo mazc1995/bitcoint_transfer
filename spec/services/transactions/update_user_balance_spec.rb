@@ -21,6 +21,6 @@ RSpec.describe Transactions::UpdateUserBalance do
   it 'lanza error personalizada si el par es inválido' do
     expect {
       described_class.new(user: user, from_currency: 'usd', to_currency: 'eth', amount_from: 100, amount_to: 1, transaction_id: 99).call
-    }.to raise_error(Transactions::InvalidBalanceUpdatePairError, /user_id: #{user.id}.*transaction_id: 99/)
+    }.to raise_error(Transactions::Errors::InvalidBalanceUpdatePairError, /user_id: #{user.id}.*transaction_id: 99/)
   end
 end 

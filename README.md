@@ -6,7 +6,7 @@ A robust RESTful API for user management, JWT authentication, and USD/BTC transa
 - Ruby 3.4+
 - Rails 8+
 - PostgreSQL
-- Bundler
+- Bundler$$
 
 ## Installation
 

@@ -17,6 +17,6 @@ RSpec.describe Transactions::CalculateAmountTo do
   it 'lanza error personalizada si el par es inválido' do
     expect {
       described_class.new(from_currency: 'usd', to_currency: 'eth', amount_from: 100, price: price, user_id: 1, transaction_id: 2).call
-    }.to raise_error(Transactions::InvalidCalculationPairError, /user_id: 1.*transaction_id: 2/)
+    }.to raise_error(Transactions::Errors::InvalidCalculationPairError, /user_id: 1.*transaction_id: 2/)
   end
 end 

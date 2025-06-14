@@ -22,7 +22,7 @@ module Transactions
           balance_btc: @user.balance_btc - @amount_from
         )
       else
-        raise Transactions::InvalidBalanceUpdatePairError.new(user_id: @user.id, transaction_id: @transaction_id)
+        raise Transactions::Errors::InvalidBalanceUpdatePairError.new(user_id: @user.id, transaction_id: @transaction_id)
       end
     end
   end
