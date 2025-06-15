@@ -1,5 +1,5 @@
 module Transactions
-  class ValidateTransaction
+  class ValidateTransaction < ApplicationService
     ALLOWED_CURRENCY_TRANSACTIONS = [['usd', 'bitcoin'], ['bitcoin', 'usd']].freeze
 
     # @param user [User]

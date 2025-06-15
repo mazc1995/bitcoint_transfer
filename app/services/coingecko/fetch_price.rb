@@ -1,5 +1,5 @@
 module Coingecko
-  class FetchPrice
+  class FetchPrice < ApplicationService
     attr_reader :from_currency, :to_currency, :result
 
     # [String] the url of the coingecko api

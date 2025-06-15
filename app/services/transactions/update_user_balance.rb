@@ -1,5 +1,5 @@
 module Transactions
-  class UpdateUserBalance
+  class UpdateUserBalance < ApplicationService
     # @param user [User]
     # @param from_currency [String]
     # @param to_currency [String]

@@ -1,5 +1,5 @@
 module Transactions
-  class CreateTransaction
+  class CreateTransaction < ApplicationService
     attr_reader :from_currency, :to_currency, :amount_from, :amount_to, :user, :price, :transaction
 
     # [Array] the allowed currency transactions

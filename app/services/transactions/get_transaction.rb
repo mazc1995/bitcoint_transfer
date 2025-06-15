@@ -1,5 +1,5 @@
 module Transactions
-  class GetTransaction
+  class GetTransaction < ApplicationService
     attr_reader :id, :user_id
 
     # @param params [Hash]

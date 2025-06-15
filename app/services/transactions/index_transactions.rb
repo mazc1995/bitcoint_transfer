@@ -1,5 +1,5 @@
 module Transactions
-  class IndexTransactions
+  class IndexTransactions < ApplicationService
     attr_reader :user_id
 
     # @param params [Hash]

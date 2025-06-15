@@ -749,6 +749,11 @@
           null
         ]
       },
+      "/home/mario/pruebas_tecnicas/vitawallet/bitcoin_wallet/app/services/application_service.rb": {
+        "lines": [
+          1
+        ]
+      },
       "/home/mario/pruebas_tecnicas/vitawallet/bitcoin_wallet/spec/services/auth/register_user_spec.rb": {
         "lines": [
           1,
@@ -1604,6 +1609,6 @@
         ]
       }
     },
-    "timestamp": 1749990612
+    "timestamp": 1749990897
   }
 }

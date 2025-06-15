@@ -1,5 +1,5 @@
 module Transactions
-  class CalculateAmountTo
+  class CalculateAmountTo < ApplicationService
     # @param from_currency [String]
     # @param to_currency [String]
     # @param amount_from [Float]

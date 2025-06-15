@@ -1,5 +1,5 @@
 module Auth
-  class RegisterUser
+  class RegisterUser < ApplicationService
     Result = Struct.new(:user, :token, :errors, keyword_init: true) do
       # @return [Boolean]
       def success?
