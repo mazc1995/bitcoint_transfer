@@ -25,7 +25,7 @@ RSpec.configure do |config|
 
 1. Regístrate o haz login usando los endpoints `/api/v1/register` o `/api/v1/login`.
 2. Copia el token JWT que devuelve la respuesta.
-3. Haz clic en el botón 'Authorize' (arriba a la derecha en Swagger UI).
+3. Haz clic en el botón 'Authorize' (arriba a la izquierda en Swagger UI).
 4. Pega el token en el campo 'Bearer' y confirma.
 5. Ahora puedes hacer peticiones a los endpoints protegidos.
 
