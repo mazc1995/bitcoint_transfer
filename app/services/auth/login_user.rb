@@ -1,19 +1,25 @@
 module Auth
   class LoginUser
     Result = Struct.new(:user, :token, :error, keyword_init: true) do
+      # @return [Boolean]
       def success?
         user.present? && error.blank?
       end
+
+      # @return [Hash]
       def user_response
         user&.as_json(only: [:id, :name, :email, :balance_usd, :balance_btc])
       end
     end
 
+    # @param email [String]
+    # @param password [String]
     def initialize(email, password)
       @email = email
       @password = password
     end
 
+    # @return [Result]
     def call
       user = User.find_by(email: @email)
       if user&.authenticate(@password)
@@ -26,6 +32,8 @@ module Auth
 
     private
 
+    # @param payload [Hash]
+    # @return [String]
     def encode_token(payload)
       JWT.encode(payload, Rails.application.secret_key_base)
     end

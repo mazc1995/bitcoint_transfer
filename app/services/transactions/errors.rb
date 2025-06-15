@@ -3,6 +3,9 @@ module Transactions
     class InvalidCurrencyPairError < StandardError
       attr_reader :user_id, :transaction_id
 
+      # @param msg [String]
+      # @param user_id [Integer]
+      # @param transaction_id [Integer]
       def initialize(msg = "Invalid currency pair. Only USD to BTC and BTC to USD are supported.", user_id: nil, transaction_id: nil)
         @user_id = user_id
         @transaction_id = transaction_id
@@ -13,6 +16,9 @@ module Transactions
     class InsufficientBalanceError < StandardError
       attr_reader :user_id, :transaction_id
 
+      # @param msg [String]
+      # @param user_id [Integer]
+      # @param transaction_id [Integer]
       def initialize(msg = "Insufficient balance", user_id: nil, transaction_id: nil)
         @user_id = user_id
         @transaction_id = transaction_id
@@ -23,6 +29,9 @@ module Transactions
     class InvalidCalculationPairError < StandardError
       attr_reader :user_id, :transaction_id
 
+      # @param msg [String]
+      # @param user_id [Integer]
+      # @param transaction_id [Integer]
       def initialize(msg = "Invalid currency pair for calculation", user_id: nil, transaction_id: nil)
         @user_id = user_id
         @transaction_id = transaction_id
@@ -33,6 +42,9 @@ module Transactions
     class InvalidBalanceUpdatePairError < StandardError
       attr_reader :user_id, :transaction_id
 
+      # @param msg [String]
+      # @param user_id [Integer]
+      # @param transaction_id [Integer]
       def initialize(msg = "Invalid currency pair for balance update", user_id: nil, transaction_id: nil)
         @user_id = user_id
         @transaction_id = transaction_id
@@ -43,6 +55,9 @@ module Transactions
     class TransactionNotFoundError < StandardError
       attr_reader :transaction_id, :user_id
 
+      # @param msg [String]
+      # @param transaction_id [Integer]
+      # @param user_id [Integer]
       def initialize(msg = "Transaction not found", transaction_id: nil, user_id: nil)
         @transaction_id = transaction_id
         @user_id = user_id

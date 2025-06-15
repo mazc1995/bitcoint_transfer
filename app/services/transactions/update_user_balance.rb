@@ -1,5 +1,11 @@
 module Transactions
   class UpdateUserBalance
+    # @param user [User]
+    # @param from_currency [String]
+    # @param to_currency [String]
+    # @param amount_from [Float]
+    # @param amount_to [Float]
+    # @param transaction_id [Integer]
     def initialize(user:, from_currency:, to_currency:, amount_from:, amount_to:, transaction_id: nil)
       @user = user
       @from_currency = from_currency
@@ -9,6 +15,7 @@ module Transactions
       @transaction_id = transaction_id
     end
 
+    # @return [void]
     def call
       case [@from_currency, @to_currency]
       when ['usd', 'bitcoin']

@@ -2,18 +2,21 @@ module Api::V1
   class TransactionsController < ApplicationController
     before_action :authenticate_user!
 
+    # GET /api/v1/users/:user_id/transactions
     def index
       authorize User.find(params[:user_id]), :index_transactions?
       @transactions = Transactions::IndexTransactions.new(index_params).call
       render json: @transactions, each_serializer: TransactionSerializer, status: :ok
     end
 
+    # GET /api/v1/users/:user_id/transactions/:id
     def show
       authorize User.find(params[:user_id]), :show_transaction?
       @transaction = Transactions::GetTransaction.new(show_params).call
       render json: @transaction, serializer: TransactionSerializer, status: :ok
     end
 
+    # POST /api/v1/users/:user_id/transactions
     def create
       authorize User.find(params[:user_id]), :create_transaction?
       @transaction = Transactions::CreateTransaction.new(transaction_params).call

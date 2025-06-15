@@ -2,6 +2,10 @@ module Transactions
   class ValidateTransaction
     ALLOWED_CURRENCY_TRANSACTIONS = [['usd', 'bitcoin'], ['bitcoin', 'usd']].freeze
 
+    # @param user [User]
+    # @param from_currency [String]
+    # @param to_currency [String]
+    # @param amount_from [Float]
     def initialize(user:, from_currency:, to_currency:, amount_from:)
       @user = user
       @from_currency = from_currency
@@ -9,6 +13,7 @@ module Transactions
       @amount_from = amount_from
     end
 
+    # @return [void]
     def call
       validate_currency_pair!
       validate_balance!
@@ -16,12 +21,14 @@ module Transactions
 
     private
 
+    # @return [void]
     def validate_currency_pair!
       unless [@from_currency, @to_currency].in?(ALLOWED_CURRENCY_TRANSACTIONS)
         raise Transactions::Errors::InvalidCurrencyPairError.new(user_id: @user.id)
       end
     end
 
+    # @return [void]
     def validate_balance!
       required_amount = @amount_from
       case [@from_currency, @to_currency]
