@@ -6,9 +6,10 @@ module Transactions
       # @param msg [String]
       # @param user_id [Integer]
       # @param transaction_id [Integer]
-      def initialize(msg = "Invalid currency pair. Only USD to BTC and BTC to USD are supported.", user_id: nil, transaction_id: nil)
+      def initialize(msg = nil, user_id: nil, transaction_id: nil)
         @user_id = user_id
         @transaction_id = transaction_id
+        msg ||= I18n.t('errors.invalid_currency_pair')
         super("#{msg} | user_id: #{user_id} | transaction_id: #{transaction_id}")
       end
     end
@@ -19,9 +20,10 @@ module Transactions
       # @param msg [String]
       # @param user_id [Integer]
       # @param transaction_id [Integer]
-      def initialize(msg = "Insufficient balance", user_id: nil, transaction_id: nil)
+      def initialize(msg = nil, user_id: nil, transaction_id: nil)
         @user_id = user_id
         @transaction_id = transaction_id
+        msg ||= I18n.t('errors.insufficient_balance')
         super("#{msg} | user_id: #{user_id} | transaction_id: #{transaction_id}")
       end
     end
@@ -32,9 +34,10 @@ module Transactions
       # @param msg [String]
       # @param user_id [Integer]
       # @param transaction_id [Integer]
-      def initialize(msg = "Invalid currency pair for calculation", user_id: nil, transaction_id: nil)
+      def initialize(msg = nil, user_id: nil, transaction_id: nil)
         @user_id = user_id
         @transaction_id = transaction_id
+        msg ||= I18n.t('errors.invalid_calculation_pair')
         super("#{msg} | user_id: #{user_id} | transaction_id: #{transaction_id}")
       end
     end
@@ -45,9 +48,10 @@ module Transactions
       # @param msg [String]
       # @param user_id [Integer]
       # @param transaction_id [Integer]
-      def initialize(msg = "Invalid currency pair for balance update", user_id: nil, transaction_id: nil)
+      def initialize(msg = nil, user_id: nil, transaction_id: nil)
         @user_id = user_id
         @transaction_id = transaction_id
+        msg ||= I18n.t('errors.invalid_balance_update_pair')
         super("#{msg} | user_id: #{user_id} | transaction_id: #{transaction_id}")
       end
     end
@@ -58,9 +62,10 @@ module Transactions
       # @param msg [String]
       # @param transaction_id [Integer]
       # @param user_id [Integer]
-      def initialize(msg = "Transaction not found", transaction_id: nil, user_id: nil)
+      def initialize(msg = nil, transaction_id: nil, user_id: nil)
         @transaction_id = transaction_id
         @user_id = user_id
+        msg ||= I18n.t('errors.transaction_not_found')
         super("#{msg} | transaction_id: #{transaction_id} | user_id: #{user_id}")
       end
     end

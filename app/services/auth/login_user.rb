@@ -27,7 +27,7 @@ module Auth
         token = encode_token(user_id: user.id)
         Result.new(user: user, token: token, error: nil)
       else
-        Result.new(user: nil, token: nil, error: 'Invalid email or password')
+        Result.new(user: nil, token: nil, error: I18n.t('errors.invalid_email_or_password'))
       end
     end
 

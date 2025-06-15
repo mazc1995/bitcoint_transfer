@@ -1,0 +1,9 @@
+es:
+  errors:
+    invalid_currency_pair: "Par de monedas inválido. Solo se permite USD a BTC y BTC a USD."
+    insufficient_balance: "Saldo insuficiente"
+    invalid_calculation_pair: "Par de monedas inválido para el cálculo"
+    invalid_balance_update_pair: "Par de monedas inválido para la actualización de saldo"
+    transaction_not_found: "Transacción no encontrada"
+    invalid_email_or_password: "Correo electrónico o contraseña inválidos" 
+    error_fetching_btc_price: "Error al obtener el precio de BTC"

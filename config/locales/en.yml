@@ -28,4 +28,11 @@
 #       enabled: "ON"
 
 en:
-  hello: "Hello world"
+  errors:
+    invalid_currency_pair: "Invalid currency pair. Only USD to BTC and BTC to USD are supported."
+    insufficient_balance: "Insufficient balance"
+    invalid_calculation_pair: "Invalid currency pair for calculation"
+    invalid_balance_update_pair: "Invalid currency pair for balance update"
+    transaction_not_found: "Transaction not found"
+    invalid_email_or_password: "Invalid email or password"
+    error_fetching_btc_price: "Error fetching BTC price"

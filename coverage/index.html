@@ -13,7 +13,7 @@
       <img src="./assets/0.13.1/loading.gif" alt="loading"/>
     </div>
     <div id="wrapper" class="hide">
-      <div class="timestamp">Generated <abbr class="timeago" title="2025-06-15T07:34:57-05:00">2025-06-15T07:34:57-05:00</abbr></div>
+      <div class="timestamp">Generated <abbr class="timeago" title="2025-06-15T07:46:50-05:00">2025-06-15T07:46:50-05:00</abbr></div>
       <ul class="group_tabs"></ul>
 
       <div id="content">
@@ -42,8 +42,8 @@
   </div>
 
   <div class="t-line-summary">
-    <b>694</b> relevant lines,
-    <span class="green"><b>693</b> lines covered</span> and
+    <b>699</b> relevant lines,
+    <span class="green"><b>698</b> lines covered</span> and
     <span class="red"><b>1</b> lines missed. </span>
     (<span class="green">
   99.86%
@@ -204,7 +204,7 @@
           <tr class="t-file">
             <td class="strong t-file__name"><a href="#6159b22e6233a82b4982bbcf0b37010902c044a1" class="src_link" title="app/services/auth/register_user.rb">app/services/auth/register_user.rb</a></td>
             <td class="green strong cell--number t-file__coverage">100.00 %</td>
-            <td class="cell--number">41</td>
+            <td class="cell--number">43</td>
             <td class="cell--number">18</td>
             <td class="cell--number">18</td>
             <td class="cell--number">0</td>
@@ -248,11 +248,11 @@
           <tr class="t-file">
             <td class="strong t-file__name"><a href="#78b4ea8ffd6e3df6441ed1801f0c676990b25065" class="src_link" title="app/services/transactions/errors.rb">app/services/transactions/errors.rb</a></td>
             <td class="green strong cell--number t-file__coverage">100.00 %</td>
-            <td class="cell--number">68</td>
-            <td class="cell--number">32</td>
-            <td class="cell--number">32</td>
+            <td class="cell--number">73</td>
+            <td class="cell--number">37</td>
+            <td class="cell--number">37</td>
             <td class="cell--number">0</td>
-            <td class="cell--number">1.47</td>
+            <td class="cell--number">1.54</td>
             
           </tr>
         
@@ -1034,7 +1034,7 @@
 
             
 
-            <code class="ruby">      render json: { error: &#39;Error fetching BTC price&#39; }, status: :bad_gateway</code>
+            <code class="ruby">      render json: { error: I18n.t(&#39;errors.error_fetching_btc_price&#39;) }, status: :bad_gateway</code>
           </li>
         </div>
       
@@ -3446,7 +3446,7 @@
 
             
 
-            <code class="ruby">        Result.new(user: nil, token: nil, error: &#39;Invalid email or password&#39;)</code>
+            <code class="ruby">        Result.new(user: nil, token: nil, error: I18n.t(&#39;errors.invalid_email_or_password&#39;))</code>
           </li>
         </div>
       
@@ -4000,7 +4000,27 @@
         </div>
       
         <div>
-          <li class="covered" data-hits="1" data-linenumber="37">
+          <li class="never" data-hits="" data-linenumber="37">
+            
+
+            
+
+            <code class="ruby">    # @param payload [Hash]</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="38">
+            
+
+            
+
+            <code class="ruby">    # @return [String]</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="39">
             
               <span class="hits">1</span>
             
@@ -4012,7 +4032,7 @@
         </div>
       
         <div>
-          <li class="covered" data-hits="2" data-linenumber="38">
+          <li class="covered" data-hits="2" data-linenumber="40">
             
               <span class="hits">2</span>
             
@@ -4024,7 +4044,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="39">
+          <li class="never" data-hits="" data-linenumber="41">
             
 
             
@@ -4034,7 +4054,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="40">
+          <li class="never" data-hits="" data-linenumber="42">
             
 
             
@@ -4044,7 +4064,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="41">
+          <li class="never" data-hits="" data-linenumber="43">
             
 
             
@@ -5779,8 +5799,8 @@
     
 
     <div class="t-line-summary">
-      <b>32</b> relevant lines.
-      <span class="green"><b>32</b> lines covered</span> and
+      <b>37</b> relevant lines.
+      <span class="green"><b>37</b> lines covered</span> and
       <span class="red"><b>0</b> lines missed.</span>
     </div>
 
@@ -5887,7 +5907,7 @@
 
             
 
-            <code class="ruby">      def initialize(msg = &quot;Invalid currency pair. Only USD to BTC and BTC to USD are supported.&quot;, user_id: nil, transaction_id: nil)</code>
+            <code class="ruby">      def initialize(msg = nil, user_id: nil, transaction_id: nil)</code>
           </li>
         </div>
       
@@ -5923,17 +5943,19 @@
 
             
 
-            <code class="ruby">        super(&quot;#{msg} | user_id: #{user_id} | transaction_id: #{transaction_id}&quot;)</code>
+            <code class="ruby">        msg ||= I18n.t(&#39;errors.invalid_currency_pair&#39;)</code>
           </li>
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="13">
+          <li class="covered" data-hits="3" data-linenumber="13">
+            
+              <span class="hits">3</span>
             
 
             
 
-            <code class="ruby">      end</code>
+            <code class="ruby">        super(&quot;#{msg} | user_id: #{user_id} | transaction_id: #{transaction_id}&quot;)</code>
           </li>
         </div>
       
@@ -5943,7 +5965,7 @@
 
             
 
-            <code class="ruby">    end</code>
+            <code class="ruby">      end</code>
           </li>
         </div>
       
@@ -5953,19 +5975,17 @@
 
             
 
-            <code class="ruby"></code>
+            <code class="ruby">    end</code>
           </li>
         </div>
       
         <div>
-          <li class="covered" data-hits="1" data-linenumber="16">
-            
-              <span class="hits">1</span>
+          <li class="never" data-hits="" data-linenumber="16">
             
 
             
 
-            <code class="ruby">    class InsufficientBalanceError &lt; StandardError</code>
+            <code class="ruby"></code>
           </li>
         </div>
       
@@ -5977,17 +5997,19 @@
 
             
 
-            <code class="ruby">      attr_reader :user_id, :transaction_id</code>
+            <code class="ruby">    class InsufficientBalanceError &lt; StandardError</code>
           </li>
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="18">
+          <li class="covered" data-hits="1" data-linenumber="18">
+            
+              <span class="hits">1</span>
             
 
             
 
-            <code class="ruby"></code>
+            <code class="ruby">      attr_reader :user_id, :transaction_id</code>
           </li>
         </div>
       
@@ -5997,7 +6019,7 @@
 
             
 
-            <code class="ruby">      # @param msg [String]</code>
+            <code class="ruby"></code>
           </li>
         </div>
       
@@ -6007,7 +6029,7 @@
 
             
 
-            <code class="ruby">      # @param user_id [Integer]</code>
+            <code class="ruby">      # @param msg [String]</code>
           </li>
         </div>
       
@@ -6017,31 +6039,29 @@
 
             
 
+            <code class="ruby">      # @param user_id [Integer]</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="22">
+            
+
+            
+
             <code class="ruby">      # @param transaction_id [Integer]</code>
           </li>
         </div>
       
         <div>
-          <li class="covered" data-hits="1" data-linenumber="22">
+          <li class="covered" data-hits="1" data-linenumber="23">
             
               <span class="hits">1</span>
             
 
             
 
-            <code class="ruby">      def initialize(msg = &quot;Insufficient balance&quot;, user_id: nil, transaction_id: nil)</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="covered" data-hits="3" data-linenumber="23">
-            
-              <span class="hits">3</span>
-            
-
-            
-
-            <code class="ruby">        @user_id = user_id</code>
+            <code class="ruby">      def initialize(msg = nil, user_id: nil, transaction_id: nil)</code>
           </li>
         </div>
       
@@ -6053,7 +6073,7 @@
 
             
 
-            <code class="ruby">        @transaction_id = transaction_id</code>
+            <code class="ruby">        @user_id = user_id</code>
           </li>
         </div>
       
@@ -6065,27 +6085,31 @@
 
             
 
+            <code class="ruby">        @transaction_id = transaction_id</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="3" data-linenumber="26">
+            
+              <span class="hits">3</span>
+            
+
+            
+
+            <code class="ruby">        msg ||= I18n.t(&#39;errors.insufficient_balance&#39;)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="3" data-linenumber="27">
+            
+              <span class="hits">3</span>
+            
+
+            
+
             <code class="ruby">        super(&quot;#{msg} | user_id: #{user_id} | transaction_id: #{transaction_id}&quot;)</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="never" data-hits="" data-linenumber="26">
-            
-
-            
-
-            <code class="ruby">      end</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="never" data-hits="" data-linenumber="27">
-            
-
-            
-
-            <code class="ruby">    end</code>
           </li>
         </div>
       
@@ -6095,12 +6119,32 @@
 
             
 
+            <code class="ruby">      end</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="29">
+            
+
+            
+
+            <code class="ruby">    end</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="30">
+            
+
+            
+
             <code class="ruby"></code>
           </li>
         </div>
       
         <div>
-          <li class="covered" data-hits="1" data-linenumber="29">
+          <li class="covered" data-hits="1" data-linenumber="31">
             
               <span class="hits">1</span>
             
@@ -6112,7 +6156,7 @@
         </div>
       
         <div>
-          <li class="covered" data-hits="1" data-linenumber="30">
+          <li class="covered" data-hits="1" data-linenumber="32">
             
               <span class="hits">1</span>
             
@@ -6124,7 +6168,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="31">
+          <li class="never" data-hits="" data-linenumber="33">
             
 
             
@@ -6134,7 +6178,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="32">
+          <li class="never" data-hits="" data-linenumber="34">
             
 
             
@@ -6144,7 +6188,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="33">
+          <li class="never" data-hits="" data-linenumber="35">
             
 
             
@@ -6154,36 +6198,12 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="34">
+          <li class="never" data-hits="" data-linenumber="36">
             
 
             
 
             <code class="ruby">      # @param transaction_id [Integer]</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="covered" data-hits="1" data-linenumber="35">
-            
-              <span class="hits">1</span>
-            
-
-            
-
-            <code class="ruby">      def initialize(msg = &quot;Invalid currency pair for calculation&quot;, user_id: nil, transaction_id: nil)</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="covered" data-hits="1" data-linenumber="36">
-            
-              <span class="hits">1</span>
-            
-
-            
-
-            <code class="ruby">        @user_id = user_id</code>
           </li>
         </div>
       
@@ -6195,7 +6215,7 @@
 
             
 
-            <code class="ruby">        @transaction_id = transaction_id</code>
+            <code class="ruby">      def initialize(msg = nil, user_id: nil, transaction_id: nil)</code>
           </li>
         </div>
       
@@ -6207,12 +6227,48 @@
 
             
 
+            <code class="ruby">        @user_id = user_id</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="39">
+            
+              <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">        @transaction_id = transaction_id</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="40">
+            
+              <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">        msg ||= I18n.t(&#39;errors.invalid_calculation_pair&#39;)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="41">
+            
+              <span class="hits">1</span>
+            
+
+            
+
             <code class="ruby">        super(&quot;#{msg} | user_id: #{user_id} | transaction_id: #{transaction_id}&quot;)</code>
           </li>
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="39">
+          <li class="never" data-hits="" data-linenumber="42">
             
 
             
@@ -6222,46 +6278,12 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="40">
+          <li class="never" data-hits="" data-linenumber="43">
             
 
             
 
             <code class="ruby">    end</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="never" data-hits="" data-linenumber="41">
-            
-
-            
-
-            <code class="ruby"></code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="covered" data-hits="1" data-linenumber="42">
-            
-              <span class="hits">1</span>
-            
-
-            
-
-            <code class="ruby">    class InvalidBalanceUpdatePairError &lt; StandardError</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="covered" data-hits="1" data-linenumber="43">
-            
-              <span class="hits">1</span>
-            
-
-            
-
-            <code class="ruby">      attr_reader :user_id, :transaction_id</code>
           </li>
         </div>
       
@@ -6276,22 +6298,26 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="45">
+          <li class="covered" data-hits="1" data-linenumber="45">
+            
+              <span class="hits">1</span>
             
 
             
 
-            <code class="ruby">      # @param msg [String]</code>
+            <code class="ruby">    class InvalidBalanceUpdatePairError &lt; StandardError</code>
           </li>
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="46">
+          <li class="covered" data-hits="1" data-linenumber="46">
+            
+              <span class="hits">1</span>
             
 
             
 
-            <code class="ruby">      # @param user_id [Integer]</code>
+            <code class="ruby">      attr_reader :user_id, :transaction_id</code>
           </li>
         </div>
       
@@ -6301,43 +6327,37 @@
 
             
 
+            <code class="ruby"></code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="48">
+            
+
+            
+
+            <code class="ruby">      # @param msg [String]</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="49">
+            
+
+            
+
+            <code class="ruby">      # @param user_id [Integer]</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="50">
+            
+
+            
+
             <code class="ruby">      # @param transaction_id [Integer]</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="covered" data-hits="1" data-linenumber="48">
-            
-              <span class="hits">1</span>
-            
-
-            
-
-            <code class="ruby">      def initialize(msg = &quot;Invalid currency pair for balance update&quot;, user_id: nil, transaction_id: nil)</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="covered" data-hits="1" data-linenumber="49">
-            
-              <span class="hits">1</span>
-            
-
-            
-
-            <code class="ruby">        @user_id = user_id</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="covered" data-hits="1" data-linenumber="50">
-            
-              <span class="hits">1</span>
-            
-
-            
-
-            <code class="ruby">        @transaction_id = transaction_id</code>
           </li>
         </div>
       
@@ -6349,37 +6369,43 @@
 
             
 
-            <code class="ruby">        super(&quot;#{msg} | user_id: #{user_id} | transaction_id: #{transaction_id}&quot;)</code>
+            <code class="ruby">      def initialize(msg = nil, user_id: nil, transaction_id: nil)</code>
           </li>
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="52">
+          <li class="covered" data-hits="1" data-linenumber="52">
+            
+              <span class="hits">1</span>
             
 
             
 
-            <code class="ruby">      end</code>
+            <code class="ruby">        @user_id = user_id</code>
           </li>
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="53">
+          <li class="covered" data-hits="1" data-linenumber="53">
+            
+              <span class="hits">1</span>
             
 
             
 
-            <code class="ruby">    end</code>
+            <code class="ruby">        @transaction_id = transaction_id</code>
           </li>
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="54">
+          <li class="covered" data-hits="1" data-linenumber="54">
+            
+              <span class="hits">1</span>
             
 
             
 
-            <code class="ruby"></code>
+            <code class="ruby">        msg ||= I18n.t(&#39;errors.invalid_balance_update_pair&#39;)</code>
           </li>
         </div>
       
@@ -6391,12 +6417,54 @@
 
             
 
+            <code class="ruby">        super(&quot;#{msg} | user_id: #{user_id} | transaction_id: #{transaction_id}&quot;)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="56">
+            
+
+            
+
+            <code class="ruby">      end</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="57">
+            
+
+            
+
+            <code class="ruby">    end</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="58">
+            
+
+            
+
+            <code class="ruby"></code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="59">
+            
+              <span class="hits">1</span>
+            
+
+            
+
             <code class="ruby">    class TransactionNotFoundError &lt; StandardError</code>
           </li>
         </div>
       
         <div>
-          <li class="covered" data-hits="1" data-linenumber="56">
+          <li class="covered" data-hits="1" data-linenumber="60">
             
               <span class="hits">1</span>
             
@@ -6408,7 +6476,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="57">
+          <li class="never" data-hits="" data-linenumber="61">
             
 
             
@@ -6418,7 +6486,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="58">
+          <li class="never" data-hits="" data-linenumber="62">
             
 
             
@@ -6428,7 +6496,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="59">
+          <li class="never" data-hits="" data-linenumber="63">
             
 
             
@@ -6438,7 +6506,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="60">
+          <li class="never" data-hits="" data-linenumber="64">
             
 
             
@@ -6448,19 +6516,19 @@
         </div>
       
         <div>
-          <li class="covered" data-hits="1" data-linenumber="61">
+          <li class="covered" data-hits="1" data-linenumber="65">
             
               <span class="hits">1</span>
             
 
             
 
-            <code class="ruby">      def initialize(msg = &quot;Transaction not found&quot;, transaction_id: nil, user_id: nil)</code>
+            <code class="ruby">      def initialize(msg = nil, transaction_id: nil, user_id: nil)</code>
           </li>
         </div>
       
         <div>
-          <li class="covered" data-hits="2" data-linenumber="62">
+          <li class="covered" data-hits="2" data-linenumber="66">
             
               <span class="hits">2</span>
             
@@ -6472,7 +6540,7 @@
         </div>
       
         <div>
-          <li class="covered" data-hits="2" data-linenumber="63">
+          <li class="covered" data-hits="2" data-linenumber="67">
             
               <span class="hits">2</span>
             
@@ -6484,7 +6552,19 @@
         </div>
       
         <div>
-          <li class="covered" data-hits="2" data-linenumber="64">
+          <li class="covered" data-hits="2" data-linenumber="68">
+            
+              <span class="hits">2</span>
+            
+
+            
+
+            <code class="ruby">        msg ||= I18n.t(&#39;errors.transaction_not_found&#39;)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="2" data-linenumber="69">
             
               <span class="hits">2</span>
             
@@ -6496,7 +6576,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="65">
+          <li class="never" data-hits="" data-linenumber="70">
             
 
             
@@ -6506,7 +6586,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="66">
+          <li class="never" data-hits="" data-linenumber="71">
             
 
             
@@ -6516,7 +6596,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="67">
+          <li class="never" data-hits="" data-linenumber="72">
             
 
             
@@ -6526,7 +6606,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="68">
+          <li class="never" data-hits="" data-linenumber="73">
             
 
             

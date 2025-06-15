@@ -34,6 +34,8 @@ module Auth
 
     private
 
+    # @param payload [Hash]
+    # @return [String]
     def encode_token(payload)
       JWT.encode(payload, Rails.application.secret_key_base)
     end
