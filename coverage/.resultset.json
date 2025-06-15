@@ -1396,6 +1396,7 @@
         "lines": [
           1,
           1,
+          1,
           null,
           1,
           1,
@@ -1424,6 +1425,22 @@
           null
         ]
       },
+      "/home/mario/pruebas_tecnicas/vitawallet/bitcoin_wallet/app/controllers/concerns/error_handler_concern.rb": {
+        "lines": [
+          1,
+          1,
+          null,
+          1,
+          1,
+          2,
+          null,
+          null,
+          1,
+          1,
+          null,
+          null
+        ]
+      },
       "/home/mario/pruebas_tecnicas/vitawallet/bitcoin_wallet/app/controllers/api/v1/currencies_controller.rb": {
         "lines": [
           1,
@@ -1443,6 +1460,7 @@
         "lines": [
           1,
           1,
+          null,
           1,
           null,
           null,
@@ -1463,14 +1481,6 @@
           1,
           3,
           2,
-          1,
-          null,
-          null,
-          1,
-          2,
-          null,
-          null,
-          1,
           1,
           null,
           null,
@@ -1594,6 +1604,6 @@
         ]
       }
     },
-    "timestamp": 1749990401
+    "timestamp": 1749990612
   }
 }

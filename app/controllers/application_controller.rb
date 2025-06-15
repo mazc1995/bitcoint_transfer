@@ -1,5 +1,6 @@
 class ApplicationController < ActionController::API
   include Pundit::Authorization
+  include ErrorHandlerConcern
 
   rescue_from Pundit::NotAuthorizedError do |exception|
     render json: { error: 'Forbidden' }, status: :forbidden
