@@ -11,7 +11,7 @@ class Api::V1::AuthController < ApplicationController
 
   # POST /api/v1/login
   def login
-    result = Auth::LoginUser.new(params[:email], params[:password]).call
+    result = Auth::LoginUser.new(user_params).call
     if result.success?
       render json: { user: result.user_response, token: result.token }, status: :ok
     else

@@ -13,7 +13,7 @@ RSpec.describe Auth::LoginUser do
   end
 
   it 'logea exitosamente y retorna token' do
-    result = described_class.new('loginuser@example.com', 'password123').call
+    result = described_class.new({ email: 'loginuser@example.com', password: 'password123' }).call
     expect(result).to be_success
     expect(result.user).to eq(user)
     expect(result.token).to be_present
@@ -21,7 +21,7 @@ RSpec.describe Auth::LoginUser do
   end
 
   it 'falla con password incorrecto' do
-    result = described_class.new('loginuser@example.com', 'wrongpass').call
+    result = described_class.new({ email: 'loginuser@example.com', password: 'wrongpass' }).call
     expect(result).not_to be_success
     expect(result.user).to be_nil
     expect(result.token).to be_nil
@@ -29,7 +29,7 @@ RSpec.describe Auth::LoginUser do
   end
 
   it 'falla con email inexistente' do
-    result = described_class.new('noexiste@example.com', 'password123').call
+    result = described_class.new({ email: 'noexiste@example.com', password: 'password123' }).call
     expect(result).not_to be_success
     expect(result.user).to be_nil
     expect(result.token).to be_nil

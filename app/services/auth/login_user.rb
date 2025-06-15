@@ -12,11 +12,12 @@ module Auth
       end
     end
 
-    # @param email [String]
-    # @param password [String]
-    def initialize(email, password)
-      @email = email
-      @password = password
+    # @param params [Hash]
+    # @option params [String] :email
+    # @option params [String] :password
+    def initialize(params)
+      @email = params[:email]
+      @password = params[:password]
     end
 
     # @return [Result]
