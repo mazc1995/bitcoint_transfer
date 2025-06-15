@@ -24,12 +24,4 @@ class Api::V1::AuthController < ApplicationController
   def user_params
     params.permit(:name, :email, :password, :password_confirmation, :balance_usd, :balance_btc)
   end
-
-  def encode_token(payload)
-    JWT.encode(payload, Rails.application.secret_key_base)
-  end
-
-  def user_response(user)
-    user.as_json(only: [:id, :name, :email, :balance_usd, :balance_btc])
-  end
 end 
