@@ -17,6 +17,7 @@ module ExternalTransactions
     def call
       validate_currency_pair!
       validate_amount!
+      validate_user_balance!
     end
 
     private
@@ -32,6 +33,16 @@ module ExternalTransactions
     def validate_amount!
       if @amount_from <= 0
         raise ExternalTransactions::Errors::InvalidAmountError.new(user_id: @user.id)
+      end
+    end
+
+    # @return [void]
+    def validate_user_balance!
+      case [@from_currency, @to_currency]
+      when ['usd', 'external']
+        if @user.balance_usd < @amount_from
+          raise ExternalTransactions::Errors::InsufficientBalanceError.new(user_id: @user.id)
+        end
       end
     end
   end

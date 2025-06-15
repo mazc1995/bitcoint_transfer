@@ -9,5 +9,6 @@ es:
     error_fetching_btc_price: "Error al obtener el precio de BTC"
     invalid_deposit_currency_pair: "Par de monedas inválido para el depósito. Solo se permite USD a External y External a USD."
     invalid_amount: "Monto inválido. El monto debe ser positivo."
+    insufficient_balance: "Saldo insuficiente"
   external_transactions:
     success: "Transacción externa realizada con éxito."

@@ -29,6 +29,16 @@ describe ExternalTransactions::CreateTransaction do
     end
   end
 
+  context 'when withdrawing usd to external with insufficient funds' do
+    it 'raises InsufficientBalanceError' do
+      user.update!(balance_usd: 20.0)
+      params = { user_id: user.id, from_currency: 'usd', to_currency: 'external', amount_from: 50 }
+      expect {
+        described_class.new(params).call
+      }.to raise_error(ExternalTransactions::Errors::InsufficientBalanceError, include(I18n.t('errors.insufficient_balance')))
+    end
+  end
+
   context 'when amount is zero or negative' do
     it 'raises InvalidAmountError for zero' do
       params = { user_id: user.id, from_currency: 'external', to_currency: 'usd', amount_from: 0 }

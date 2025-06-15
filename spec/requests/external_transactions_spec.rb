@@ -93,6 +93,17 @@ RSpec.describe 'ExternalTransactions API', type: :request do
           expect(response).to have_http_status(:unauthorized)
         end
       end
+
+      response '422', 'fondos insuficientes' do
+        let(:user_id) { user.id }
+        let(:external_transaction) { { from_currency: 'usd', to_currency: 'external', amount_from: 200 } }
+        let(:Authorization) { "Bearer #{auth_token}" }
+        before { user.update!(balance_usd: 100.0) }
+        run_test! do |response|
+          expect(response).to have_http_status(:unprocessable_entity)
+          expect(JSON.parse(response.body)['error']).to include(I18n.t('errors.insufficient_balance'))
+        end
+      end
     end
   end
 end 

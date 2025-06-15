@@ -21,5 +21,9 @@ module ErrorHandlerConcern
     rescue_from ExternalTransactions::Errors::InvalidCurrencyPairError do |e|
       render json: { error: e.message }, status: :unprocessable_entity
     end
+
+    rescue_from ExternalTransactions::Errors::InsufficientBalanceError do |e|
+      render json: { error: e.message }, status: :unprocessable_entity
+    end
   end
 end
