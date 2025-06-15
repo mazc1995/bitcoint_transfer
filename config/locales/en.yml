@@ -36,3 +36,7 @@ en:
     transaction_not_found: "Transaction not found"
     invalid_email_or_password: "Invalid email or password"
     error_fetching_btc_price: "Error fetching BTC price"
+    invalid_deposit_currency_pair: "Invalid deposit currency pair. Only USD to External and External to USD are supported."
+    invalid_amount: "Invalid amount. Amount must be positive."
+  external_transactions:
+    success: "External transaction completed successfully."

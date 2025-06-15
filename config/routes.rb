@@ -7,6 +7,7 @@ Rails.application.routes.draw do
     namespace :v1 do
       resources :users do
         resources :transactions, only: [:index, :create, :show]
+        post 'external_transactions', to: 'transactions#create_external_transaction'
       end
       get 'currencies/btc_price', to: 'currencies#btc_price'
       post 'register', to: 'auth#register'

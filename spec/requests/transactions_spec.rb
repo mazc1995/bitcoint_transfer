@@ -104,6 +104,25 @@ RSpec.describe 'Transactions API', type: :request do
           expect(json_response['error']).to eq('Forbidden')
         end
       end
+
+      response '422', 'monto negativo' do
+        let(:user_id) { user.id }
+        let(:transaction) do
+          {
+            from_currency: 'usd',
+            to_currency: 'bitcoin',
+            amount_from: -100.0
+          }
+        end
+        let(:Authorization) { "Bearer #{auth_token}" }
+        before do
+          allow(Coingecko::FetchPrice).to receive(:new).and_return(double(call: 50000.0))
+        end
+        run_test! do |response|
+          expect(response).to have_http_status(:unprocessable_entity)
+          expect(JSON.parse(response.body)['error']).to be_present
+        end
+      end
     end
 
     get 'Gets all transactions' do

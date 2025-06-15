@@ -17,6 +17,7 @@ module Transactions
     def call
       validate_currency_pair!
       validate_balance!
+      validate_amount!
     end
 
     private
@@ -36,6 +37,13 @@ module Transactions
         raise Transactions::Errors::InsufficientBalanceError.new(user_id: @user.id) if @user.balance_usd < required_amount
       when ['bitcoin', 'usd']
         raise Transactions::Errors::InsufficientBalanceError.new(user_id: @user.id) if @user.balance_btc < required_amount
+      end
+    end
+
+    # @return [void]
+    def validate_amount!
+      if @amount_from <= 0
+        raise Transactions::Errors::InvalidAmountError.new(user_id: @user.id)
       end
     end
   end

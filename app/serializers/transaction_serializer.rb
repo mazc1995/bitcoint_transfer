@@ -16,7 +16,7 @@ class TransactionSerializer < ActiveModel::Serializer
   private
 
   def format_amount(currency, amount)
-    if currency == 'usd'
+    if currency == 'usd' || currency == 'external'
       amount.to_f.round(2)
     elsif currency == 'bitcoin'
       amount.to_f.round(8)

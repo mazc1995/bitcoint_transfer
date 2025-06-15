@@ -1,23 +1,22 @@
-module Transactions
+module ExternalTransactions
   class CreateTransaction < ApplicationService
     attr_reader :from_currency, :to_currency, :amount_from, :amount_to, :user, :price, :transaction
 
     # @param transaction_params [Hash]
     # @option transaction_params [Integer] :user_id
-    # @option transaction_params [String] :from_currency (usd, bitcoin)
-    # @option transaction_params [String] :to_currency (usd, bitcoin)
+    # @option transaction_params [String] :from_currency (usd, external)
+    # @option transaction_params [String] :to_currency (usd, external)
     # @option transaction_params [Float] :amount_from (amount of currency to convert)
     def initialize(transaction_params)
       @from_currency = transaction_params[:from_currency]
       @to_currency = transaction_params[:to_currency]
-      @amount_from = transaction_params[:amount_from]
+      @amount_from = transaction_params[:amount_from].to_f
       @user = User.find(transaction_params[:user_id])
     end
 
     # @return [Transaction]
     def call
       validate_transaction
-      fetch_price
       calculate_amount_to
       create_transaction
 
@@ -36,7 +35,7 @@ module Transactions
 
     # @return [void]
     def validate_transaction
-      Transactions::ValidateTransaction.new(
+      ExternalTransactions::ValidateTransaction.new(
         user: user,
         from_currency: from_currency,
         to_currency: to_currency,
@@ -45,20 +44,8 @@ module Transactions
     end
 
     # @return [Float]
-    def fetch_price
-      @price = Coingecko::FetchPrice.new.call
-    end
-
-    # @return [Float]
     def calculate_amount_to
-      @amount_to = Transactions::CalculateAmountTo.new(
-        from_currency: from_currency,
-        to_currency: to_currency,
-        amount_from: amount_from,
-        price: price,
-        user_id: user.id,
-        transaction_id: transaction&.id
-      ).call
+      @amount_to = amount_from
     end
 
     # @return [Transaction]
@@ -70,7 +57,7 @@ module Transactions
 
     # @return [void]
     def update_user_balance
-      Transactions::UpdateUserBalance.new(
+      ExternalTransactions::UpdateUserBalance.new(
         user: user,
         from_currency: from_currency,
         to_currency: to_currency,
@@ -88,7 +75,7 @@ module Transactions
         to_currency: to_currency,
         amount_from: amount_from,
         amount_to: amount_to,
-        price_reference: price,
+        price_reference: 1,
         status: :pending
       )
     end

@@ -9,7 +9,7 @@ info:
 
     1. Regístrate o haz login usando los endpoints `/api/v1/register` o `/api/v1/login`.
     2. Copia el token JWT que devuelve la respuesta.
-    3. Haz clic en el botón 'Authorize' (arriba a la derecha en Swagger UI).
+    3. Haz clic en el botón 'Authorize' (arriba a la izquierda en Swagger UI).
     4. Pega el token en el campo 'Bearer' y confirma.
     5. Ahora puedes hacer peticiones a los endpoints protegidos.
 
@@ -91,6 +91,51 @@ paths:
           description: price fetched
         '502':
           description: coingecko error
+  "/api/v1/users/{user_id}/external_transactions":
+    parameters:
+    - name: user_id
+      in: path
+      required: true
+      schema:
+        type: integer
+    post:
+      summary: Crea una transacción externa (depósito o retiro)
+      security:
+      - Bearer: []
+      tags:
+      - ExternalTransactions
+      parameters: []
+      responses:
+        '201':
+          description: retiro externo exitoso
+        '422':
+          description: par de monedas inválido
+        '401':
+          description: requiere autenticación
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                from_currency:
+                  type: string
+                  enum:
+                  - external
+                  - usd
+                to_currency:
+                  type: string
+                  enum:
+                  - usd
+                  - external
+                amount_from:
+                  type: number
+                  format: float
+                  example: 50.0
+              required:
+              - from_currency
+              - to_currency
+              - amount_from
   "/api/v1/users/{user_id}/transactions":
     parameters:
     - name: user_id

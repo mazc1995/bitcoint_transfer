@@ -1,5 +1,6 @@
 module Api::V1
   class TransactionsController < ApplicationController
+    include ErrorHandlerConcern
 
     before_action :authenticate_user!
 
@@ -21,6 +22,13 @@ module Api::V1
     def create
       authorize User.find(params[:user_id]), :create_transaction?
       @transaction = Transactions::CreateTransaction.new(transaction_params).call
+      render json: @transaction, serializer: TransactionSerializer, status: :created
+    end
+
+    # POST /api/v1/users/:user_id/external_transactions
+    def create_external_transaction
+      authorize User.find(params[:user_id]), :create_transaction?
+      @transaction = ExternalTransactions::CreateTransaction.new(transaction_params).call
       render json: @transaction, serializer: TransactionSerializer, status: :created
     end
 
