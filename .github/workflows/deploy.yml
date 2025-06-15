@@ -1,0 +1,8 @@
+# ... existing code ...
+    - name: Copy coverage to public
+      run: |
+        if [ -d coverage ]; then
+          rm -rf public/coverage
+          cp -r coverage public/
+        fi
+# ... existing code ... 

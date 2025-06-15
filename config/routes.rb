@@ -15,5 +15,7 @@ Rails.application.routes.draw do
     end
   end
 
+  get '/coverage', to: redirect('/coverage/index.html')
+
   root to: redirect('/api-docs')
 end

@@ -164,4 +164,12 @@ RSpec.describe 'Transactions API', type: :request do
       end
     end
   end
+
+  describe 'Autenticación y current_user' do
+    it 'asigna correctamente current_user con un JWT válido' do
+      token = JWT.encode({ user_id: user.id }, Rails.application.secret_key_base)
+      get "/api/v1/users/#{user.id}/transactions", headers: { "Authorization" => "Bearer #{token}" }
+      expect(response).not_to have_http_status(:unauthorized)
+    end
+  end
 end
